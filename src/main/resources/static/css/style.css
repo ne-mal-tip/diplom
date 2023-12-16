@@ -1,0 +1,56 @@
+
+nav a {
+    color: #495057;
+}
+
+nav a:hover {
+    color: #ffffff;
+    background-color: rgba(28, 90, 131, 0.8);
+    border-radius: 8px;
+}
+
+.navbar-brand .brand-text {
+    color: #495057;
+}
+
+.navbar-brand:hover .brand-text {
+    color: #ffffff;
+}
+
+.navbar-brand:hover img {
+    filter: invert(100%);
+}
+
+.corner-badge {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border: 2px dashed lightgray;
+    border-top-left-radius: 10px;
+
+    padding: 5px;
+    background-color: lightgray;
+}
+
+.col-md-3 {
+    text-align: center;
+}
+
+.card {
+    width: 26rem;
+    margin-bottom: 60px;
+}
+
+.card-body {
+    background-color: #f8f9fa;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #6c757d;
+}

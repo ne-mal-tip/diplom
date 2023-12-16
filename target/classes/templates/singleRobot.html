@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="~{header}"></th:block>
+    <title>Robot Details</title>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Robot Details</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-4">Model:</dt>
+                <dd class="col-sm-8" th:text="${robot.model}"></dd>
+
+                <dt class="col-sm-4">Type:</dt>
+                <dd class="col-sm-8" th:text="${robot.type}"></dd>
+
+                <dt class="col-sm-4">Power:</dt>
+                <dd class="col-sm-8" th:text="${robot.power}"></dd>
+
+                <dt class="col-sm-4">Drill:</dt>
+                <dd class="col-sm-8" th:text="${robot.drill}"></dd>
+
+                <dt class="col-sm-4">Table Number:</dt>
+                <dd class="col-sm-8" th:text="${robot.tableNumber}"></dd>
+
+                <dt class="col-sm-4">Height:</dt>
+                <dd class="col-sm-8" th:text="${robot.height}"></dd>
+
+                <dt class="col-sm-4">Tilt:</dt>
+                <dd class="col-sm-8" th:text="${robot.tilt}"></dd>
+
+                <dt class="col-sm-4">Size:</dt>
+                <dd class="col-sm-8" th:text="${robot.size}"></dd>
+
+                <dt class="col-sm-4">Weight:</dt>
+                <dd class="col-sm-8" th:text="${robot.weight}"></dd>
+
+                <dt class="col-sm-4">Bio:</dt>
+                <dd class="col-sm-8" th:text="${robot.bio}"></dd>
+            </dl>
+        </div>
+        <div class="col-md-6">
+            <h3>Manufacturing Processes</h3>
+            <table class="table table-bordered">
+                <thead class="table-header">
+                <tr>
+                    <th>Product</th>
+                    <th>Action</th>
+                    <th>Working Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="process : ${manufacturingProcess}">
+                    <td th:text="${process.product.name}"></td>
+                    <td th:text="${process.action.name}"></td>
+                    <td th:text="${process.workingTime}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

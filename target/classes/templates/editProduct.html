@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="~{header}"></th:block>
+    <title>Create Manufacturing Process</title>
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center">Create Manufacturing Process</h2>
+    <form class="mx-auto mb-sm-2" method="post" th:action="@{/products/save}" th:object="${productForm}">
+        <div class="container mt-4">
+            <input hidden="hidden"
+                   th:field="*{productId}" th:id="*{productId}"/>
+            <div>
+                <label class="col-md-5 mb-3" th:for="*{productName}">Product name:</label>
+                <input class="col-md-5 mb-3" th:field="*{productName}"
+                       th:id="*{productName}"/>
+                <span class="error" th:errors="*{productName}" th:if="${#fields.hasErrors('productName')}"></span>
+            </div>
+            <div>
+                <label class="col-md-5 mb-3" th:for="*{username}">Employee name:</label>
+                <select class="col-md-5 mb-3" data-show-subtext="true" th:field="*{username}"
+                        th:id="*{username}">
+                    <option th:each="employee : ${employees}" th:text="${employee.user.username}"
+                            th:value="${employee.user.username}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <button class="btn btn-primary col-md-6" onclick="addStep()" type="button">Add Step</button>
+            <div class="col-md-3">Total Time: <span id="totalTime"></span></div>
+            <button class="btn btn-success col-md-3" type="submit">Save</button>
+        </div>
+        <div class="step" th:each="step, stepStat : *{manufacturingProcessFormList}">
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <input th:field="*{manufacturingProcessFormList[__${stepStat.index}__].id}"
+                           th:id="${'id_' + stepStat.index}"
+                           type="hidden"/>
+                    <label class="col-form-label col-md-12 text-center"
+                           th:for="${'robotId'}">Robot:</label>
+                    <select class="form-control"
+                            th:field="*{manufacturingProcessFormList[__${stepStat.index}__].robotId}"
+                            th:id="${'robotId_' + stepStat.index}">
+                        <option th:each="robot : ${robots}" th:text="${robot.model}"
+                                th:value="${robot.id}"></option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label class="col-form-label col-md-12 text-center"
+                           th:for="${'actionId'}">Action:</label>
+                    <select class="form-control"
+                            th:field="*{manufacturingProcessFormList[__${stepStat.index}__].actionId}"
+                            th:id="${'actionId_' + stepStat.index}">
+                        <option th:each="action : ${actions}" th:text="${action.name}"
+                                th:value="${action.id}"></option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label class="col-form-label col-md-12 text-center" th:for="${'workingTime'}">Working
+                        Time:</label>
+                    <input class="form-control"
+                           th:id="${'workingTime_' + stepStat.index}"
+                           th:field="*{manufacturingProcessFormList[__${stepStat.index}__].workingTime}"
+                           th:onchange="updateTotalTime()" title="please, enter in format hh:mm:ss"
+                           type="text"/>
+                    <div class="alert alert-danger"
+                         th:errors="*{manufacturingProcessFormList[__${stepStat.index}__].workingTime}"
+                         th:if="${#fields.hasErrors('{manufacturingProcessFormList[__${stepStat.index}__].workingTime}')}"></div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label class="col-form-label col-md-12 text-center">Control</label>
+                    <button class="btn btn-danger w-100 form-control"
+                            th:onclick="'removeStep(' + ${stepStat.index} + ')'"
+                            type="button">Remove
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+</body>
+</html>

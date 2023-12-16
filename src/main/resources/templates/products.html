@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="~{header}"></th:block>
+    <title>Product List</title>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <a class="btn btn-primary d-block w-100" th:href="@{/products/createForm}">
+                Create Product
+            </a>
+        </div>
+        <div class="col-md-6">
+            <a class="btn btn-success d-block w-100" th:href="@{/warehouse}">
+                Warehouse
+            </a>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-4 mb-2" th:each="product : ${products}">
+            <div class="card">
+                <div class="card-body text-center">
+                    <!-- Displaying Product properties -->
+                    <h5 class="card-title" th:text="${product.name}"></h5>
+                    <a class="btn btn-group-sm btn-outline-info"
+                       th:href="@{'/products/editForm?id=' + ${product.id}}"
+                       th:text="'Edit ' + ${product.manufacturingProcessList.size()} + ' steps'"></a>
+                    <div class="corner-badge">
+                        <p class="card-text">
+                            <span class="badge" th:text="${product.employee.user.username}"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
